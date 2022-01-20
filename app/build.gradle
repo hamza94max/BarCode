@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+
 }
 
 android {
@@ -31,6 +33,7 @@ android {
     }
 
     dataBinding{
+        //noinspection DataBindingWithoutKapt
         enabled = true
     }
 }
@@ -46,15 +49,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.cardview:cardview:1.0.0")
 
-
-
-
-
-
-
-
-
-
+    // barCode library
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
 
     testImplementation 'junit:junit:4.+'
