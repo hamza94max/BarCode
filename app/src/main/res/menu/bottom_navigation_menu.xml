@@ -3,14 +3,11 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/expire"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Expire"
-
+        android:title="@string/expired_products"
         />
 
 

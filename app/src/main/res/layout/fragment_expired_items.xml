@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ExpiredItemsFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="22222222222222222"
-        android:textSize="30sp" />
+        android:layout_margin="7dp"
+        tools:listitem="@layout/items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

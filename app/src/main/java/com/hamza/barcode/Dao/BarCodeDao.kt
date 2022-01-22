@@ -14,12 +14,12 @@ abstract class BarCodeDao {
     @Insert
     abstract suspend fun insertItem(barCodeContent: BarCodeContent)
 
-    @Query("SELECT * FROM BarCodeContents")
-    abstract suspend fun getAllItems(): LiveData<List<BarCodeContent?>?>?
+    @Query("SELECT * FROM BarCodetable")
+    abstract fun getAllItems(): LiveData<List<BarCodeContent>>
 
     @Delete
     abstract suspend fun deleteItem(barCodeContent: BarCodeContent?)
 
-    @Query("DELETE FROM BarCodeContents")
+    @Query("DELETE FROM BarCodetable")
     abstract suspend fun deleteAllItems()
 }

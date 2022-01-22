@@ -1,5 +1,6 @@
 package com.hamza.barcode.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hamza.barcode.Models.BarCodeContent
 import com.hamza.barcode.R
 
-class BarCodeAdapter(private val mList: List<BarCodeContent>) :
+class BarCodeAdapter(private val mList: ArrayList<BarCodeContent>) :
     RecyclerView.Adapter<BarCodeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +28,14 @@ class BarCodeAdapter(private val mList: List<BarCodeContent>) :
         holder.itemExpireDate.text = ItemsViewModel.ExpireDate
 
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateDataSet(items: List<BarCodeContent>) {
+        this.mList.clear()
+        this.mList.addAll(items)
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount(): Int {
         return mList.size

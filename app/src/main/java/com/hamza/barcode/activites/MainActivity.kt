@@ -1,7 +1,6 @@
 package com.hamza.barcode.activites
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hamza.barcode.Fragments.ExpiredItemsFragment
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val firstFragment = HomeFragment()
         val secondFragment = ExpiredItemsFragment()
 
-        //setCurrentFragment(firstFragment)
+        setCurrentFragment(firstFragment)
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -39,6 +38,5 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.framelayout, fragment)
             commit()
 
-            bottomNavigationView.visibility = View.VISIBLE
         }
 }
