@@ -18,6 +18,27 @@ import com.journeyapps.barcodescanner.ScanOptions
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val resultScan = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+        if (result.contents == null) {
+            Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+
+
+            // TODO : add type of product and name of item
+
+            // TODO date
+            /* compare the date of barcode with the current day
+
+            if the date of barcode after current day -> add to home recyclerview with the number of still days
+            else if date of barcode before currrnt day  -> add it to expired products + date of expired
+            else Add as "This product has no expire date "
+             */
+
+
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,29 +59,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         binding.CaptureNewBarcode.setOnClickListener {
-            val resultScan = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-                if (result.contents == null) {
-                    Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-
-
-                    // TODO : add type of product and name of item
-
-                    // TODO date
-                    /* compare the date of barcode with the current day
-
-                    if the date of barcode after current day -> add to home recyclerview with the number of still days
-                    else if date of barcode before currrnt day  -> add it to expired products + date of expired
-                    else Add as "This product has no expire date "
-                     */
-
-
-                }
-            }
-
             resultScan.launch(ScanOptions())
         }
 
+
     }
+
+
 }
+
+
