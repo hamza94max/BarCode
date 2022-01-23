@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name"> Goods Expiry Date Tracker </string>
-    <string name="expired_products">Expired products</string>
+    <string name="expired_products">Expired Products</string>
     <string name="home">Home</string>
 </resources>

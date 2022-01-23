@@ -1,4 +1,4 @@
-package com.hamza.barcode.ui.Workmanger
+package com.hamza.barcode.Workmanger
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,7 +10,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.hamza.barcode.R
 
-class Workmanager(context: Context, workerParams: WorkerParameters) :
+class NotificationWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
 
     private val notificationManager =
@@ -18,7 +18,7 @@ class Workmanager(context: Context, workerParams: WorkerParameters) :
                 as NotificationManager
 
     override fun doWork(): Result {
-        displayNotification("The product //name is expired today, Don't use it for your health ")
+        displayNotification("The product you have recently added is expired, Don't use it for your health ")
         return Result.success()
     }
 

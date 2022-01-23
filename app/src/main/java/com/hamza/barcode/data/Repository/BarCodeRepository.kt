@@ -18,13 +18,12 @@ class BarCodeRepository(application: Application?) {
 
     fun AllexpiredItems() = dao.getexpiredItems()
 
-
     suspend fun insertItem(barCodeContent: BarCodeContent) {
-        barCodeContent.expiredDays = Util.getexpiredDaysforItem(barCodeContent.ExpireDate)
+        barCodeContent.expiredDays = Util.getExpiredDaysforItem(barCodeContent.ExpireDate)
         dao.insertItem(barCodeContent)
     }
 
-    suspend fun deleteItem() {
+    suspend fun deleteallItem() {
         dao.deleteAllItems()
     }
 }

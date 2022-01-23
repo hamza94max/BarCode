@@ -27,16 +27,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         if (result.contents == null) {
             Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
         } else {
+            Toast.makeText(context, result.contents, Toast.LENGTH_LONG).show()
             val newBarcode = Dataset.SearchforBarcode(result.contents)
 
             if (newBarcode != null) {
 
                 newBarcode.expiredDays =
-                    Util.getexpiredDaysforItem(newBarcode.ExpireDate.toString())
+                    Util.getExpiredDaysforItem(newBarcode.ExpireDate)
 
                 Toast.makeText(
                     context,
-                    "added : " + newBarcode.itemName.toString(),
+                    "added : " + newBarcode.itemName,
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -55,8 +56,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
-
-        //viewmodel.insertItem(BarCodeContent(554,"21459577","Milk",ItemType.Drinks.toString(), "1/26/2022",3))
 
         viewmodel.getNonexpiredItems.observe(viewLifecycleOwner) {
             adapter.updateDataSet(it)

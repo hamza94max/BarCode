@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="7dp"
+    android:layoutDirection="ltr"
     android:layout_margin="7dp">
 
     <RelativeLayout
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_type"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="155dp"
             android:layout_toEndOf="@+id/item_expireDate"
             android:padding="7dp"
             android:text="2 days "
