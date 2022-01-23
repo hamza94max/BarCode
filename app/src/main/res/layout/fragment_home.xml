@@ -12,7 +12,8 @@
         android:id="@+id/HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragments.HomeFragment">
+        android:layoutDirection="ltr"
+        tools:context=".ui.Fragments.HomeFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView

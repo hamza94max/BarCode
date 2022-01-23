@@ -1,18 +1,19 @@
-package com.hamza.barcode.ViewModel
+package com.hamza.barcode.ui.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.hamza.barcode.Models.BarCodeContent
-import com.hamza.barcode.Repository.BarCodeRepository
+import com.hamza.barcode.data.Models.BarCodeContent
+import com.hamza.barcode.data.Repository.BarCodeRepository
 import kotlinx.coroutines.launch
 
 
 class BarcodeViewmodel(application: Application) : AndroidViewModel(application) {
 
     private val repository: BarCodeRepository = BarCodeRepository(application)
-    val getItems by lazy { repository.AllItems() }
 
+    val getNonexpiredItems by lazy { repository.AllNonexpiredItems() }
+    val getexpiredItems by lazy { repository.AllexpiredItems() }
 
     fun insertItem(barCodeContent: BarCodeContent) {
         viewModelScope.launch {

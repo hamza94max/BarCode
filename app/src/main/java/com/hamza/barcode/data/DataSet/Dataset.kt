@@ -1,6 +1,6 @@
-package com.hamza.barcode.DataSet
+package com.hamza.barcode.data.DataSet
 
-import com.hamza.barcode.Models.BarCodeContent
+import com.hamza.barcode.data.Models.BarCodeContent
 
 class Dataset {
 

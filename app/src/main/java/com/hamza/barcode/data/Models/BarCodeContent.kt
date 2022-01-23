@@ -1,4 +1,4 @@
-package com.hamza.barcode.Models
+package com.hamza.barcode.data.Models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

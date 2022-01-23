@@ -1,4 +1,4 @@
-package com.hamza.barcode.Adapters
+package com.hamza.barcode.ui.Adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.hamza.barcode.Models.BarCodeContent
 import com.hamza.barcode.R
+import com.hamza.barcode.data.Models.BarCodeContent
 
 class BarCodeAdapter(private val mList: ArrayList<BarCodeContent>) :
     RecyclerView.Adapter<BarCodeAdapter.ViewHolder>() {
@@ -20,12 +20,14 @@ class BarCodeAdapter(private val mList: ArrayList<BarCodeContent>) :
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ItemsViewModel = mList[position]
 
         holder.itemName.text = ItemsViewModel.itemName
         holder.itemType.text = ItemsViewModel.itemtype
         holder.itemExpireDate.text = ItemsViewModel.ExpireDate
+        holder.itemExpiredays.text = ItemsViewModel.expiredDays.toString() + " days"
 
     }
 
@@ -45,6 +47,6 @@ class BarCodeAdapter(private val mList: ArrayList<BarCodeContent>) :
         val itemName: TextView = itemView.findViewById(R.id.item_name)
         val itemType: TextView = itemView.findViewById(R.id.item_type)
         val itemExpireDate: TextView = itemView.findViewById(R.id.item_expireDate)
-
+        val itemExpiredays: TextView = itemView.findViewById(R.id.item_expiredDays)
     }
 }

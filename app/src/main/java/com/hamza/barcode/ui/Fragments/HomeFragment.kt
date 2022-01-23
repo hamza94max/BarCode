@@ -1,4 +1,4 @@
-package com.hamza.barcode.Fragments
+package com.hamza.barcode.ui.Fragments
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,49 +8,42 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hamza.barcode.Adapters.BarCodeAdapter
-import com.hamza.barcode.DataSet.Dataset
-import com.hamza.barcode.DataSet.Util
 import com.hamza.barcode.R
-import com.hamza.barcode.ViewModel.BarcodeViewmodel
+import com.hamza.barcode.data.DataSet.Dataset
+import com.hamza.barcode.data.DataSet.Util
 import com.hamza.barcode.databinding.FragmentHomeBinding
+import com.hamza.barcode.ui.Adapters.BarCodeAdapter
+import com.hamza.barcode.ui.ViewModels.BarcodeViewmodel
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 
-
 class HomeFragment : Fragment(R.layout.fragment_home) {
-
 
     private val viewmodel by viewModels<BarcodeViewmodel>()
     private val adapter by lazy { BarCodeAdapter(arrayListOf()) }
 
     private val resultScan = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
         if (result.contents == null) {
-            Toast.makeText(context, "Not found in database !", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
         } else {
             val newBarcode = Dataset.SearchforBarcode(result.contents)
 
-            newBarcode?.expiredDays = Util.getexpiredDaysforItem(newBarcode?.ExpireDate.toString())
+            if (newBarcode != null) {
 
-            Toast.makeText(
-                context,
-                "added : " + newBarcode?.itemName.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+                newBarcode.expiredDays =
+                    Util.getexpiredDaysforItem(newBarcode.ExpireDate.toString())
 
-            // TODO : add type of product and name of item
-            newBarcode?.let { viewmodel.insertItem(it) }
+                Toast.makeText(
+                    context,
+                    "added : " + newBarcode.itemName.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
 
-            // TODO date
-            /* compare the date of barcode with the current day
-
-            if the date of barcode after current day -> add to home recyclerview with the number of still days
-            else if date of barcode before currrnt day  -> add it to expired products + date of expired
-            else Add as "This product has no expire date "
-             */
-
-
+                newBarcode.let { viewmodel.insertItem(it) }
+            } else {
+                Toast.makeText(context, "Not found in dataBase ! ", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -63,26 +56,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
 
-        //        val barCodeContent = BarCodeContent(
-        //            5, "554 6849",
-        //            "Milk", ItemType.Drinks.toString(), "2021/2/15", false
-        //        )
+        //viewmodel.insertItem(BarCodeContent(554,"21459577","Milk",ItemType.Drinks.toString(), "1/26/2022",3))
 
-        // viewmodel.insertItem(barCodeContent)
-
-
-        viewmodel.getItems.observe(viewLifecycleOwner) {
+        viewmodel.getNonexpiredItems.observe(viewLifecycleOwner) {
             adapter.updateDataSet(it)
         }
-
 
         binding.CaptureNewBarcode.setOnClickListener {
             resultScan.launch(ScanOptions())
         }
 
-
     }
-    }
-
+}
 
 
