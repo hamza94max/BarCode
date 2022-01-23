@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="7dp"
     android:layout_margin="7dp">
 
     <RelativeLayout
@@ -32,13 +34,25 @@
 
         <TextView
             android:id="@+id/item_expireDate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_type"
             android:padding="7dp"
             android:text="item expireDate : "
             android:textColor="@color/black"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_expiredDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_type"
+            android:layout_marginStart="170dp"
+            android:layout_toEndOf="@+id/item_expireDate"
+            android:padding="7dp"
+            android:text="2 days "
+            android:textColor="#1BC623"
+            android:textSize="17sp" />
 
     </RelativeLayout>
 

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
-        android:title="Home" />
+        android:title="@string/home"
+        app:showAsAction="ifRoom"
+
+        />
 
     <item
         android:id="@+id/expire"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Expire"
+        android:title="@string/expired_products"
+        app:showAsAction="ifRoom"
 
         />
 

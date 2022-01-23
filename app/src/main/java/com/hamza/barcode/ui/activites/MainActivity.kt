@@ -1,12 +1,11 @@
-package com.hamza.barcode.activites
+package com.hamza.barcode.ui.activites
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.hamza.barcode.Fragments.ExpiredItemsFragment
-import com.hamza.barcode.Fragments.HomeFragment
 import com.hamza.barcode.R
+import com.hamza.barcode.ui.Fragments.ExpiredItemsFragment
+import com.hamza.barcode.ui.Fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +38,5 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.framelayout, fragment)
             commit()
 
-            bottomNavigationView.visibility = View.VISIBLE
         }
 }
