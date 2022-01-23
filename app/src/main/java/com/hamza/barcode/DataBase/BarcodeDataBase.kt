@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.hamza.barcode.Dao.BarCodeDao
 import com.hamza.barcode.Models.BarCodeContent
 
-@Database(entities = [BarCodeContent::class], version = 1)
+@Database(entities = [BarCodeContent::class], version = 2)
 
 abstract class BarcodeDataBase : RoomDatabase() {
 

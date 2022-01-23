@@ -17,8 +17,8 @@ data class BarCodeContent(
     @ColumnInfo(name = "ExpireDate")
     val ExpireDate: String,
 
-    @ColumnInfo(name = "isExpired")
-    val isexpired: Boolean
+    @ColumnInfo(name = "expiredDays")
+    var expiredDays: Int
 
 
 )
