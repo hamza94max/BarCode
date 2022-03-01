@@ -2,40 +2,23 @@ package com.hamza.barcode.ui.activites
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.hamza.barcode.R
-import com.hamza.barcode.ui.Fragments.ExpiredItemsFragment
-import com.hamza.barcode.ui.Fragments.HomeFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.hamza.barcode.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        installSplashScreen()
 
-        val firstFragment = HomeFragment()
-        val secondFragment = ExpiredItemsFragment()
-
-        //setCurrentFragment(firstFragment)
-
-
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> setCurrentFragment(firstFragment)
-                R.id.expire -> setCurrentFragment(secondFragment)
-
-            }
-            true
-        }
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
     }
 
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.framelayout, fragment)
-            commit()
-
-        }
 }
