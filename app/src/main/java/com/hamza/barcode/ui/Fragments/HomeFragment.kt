@@ -20,7 +20,6 @@ import com.journeyapps.barcodescanner.ScanOptions
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -35,6 +34,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
 
@@ -45,7 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.CaptureNewBarcode.setOnClickListener {
             resultScan.launch(ScanOptions())
         }
-        return super.onCreateView(inflater, container, savedInstanceState)
+
     }
 
 

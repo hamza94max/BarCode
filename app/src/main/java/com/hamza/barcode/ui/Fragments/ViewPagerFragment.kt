@@ -20,10 +20,13 @@ class ViewPagerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentViewPagerBinding.inflate(layoutInflater, container, false)
 
-        val fragments = listOf(HomeFragment(), ExpiredItemsFragment())
+        val fragments = listOf(
+            HomeFragment(),
+            ExpiredItemsFragment(),
+        )
 
         val adapter =
             ViewPagerAdapter(fragments, childFragmentManager, viewLifecycleOwner.lifecycle)

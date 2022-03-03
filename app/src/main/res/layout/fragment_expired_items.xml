@@ -3,13 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.Fragments.ExpiredItemsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/expiredRecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="7dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/items" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/imgEmptyExpired"
+        layout="@layout/empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

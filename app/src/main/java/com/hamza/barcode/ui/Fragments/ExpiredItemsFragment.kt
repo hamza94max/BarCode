@@ -24,17 +24,31 @@ class ExpiredItemsFragment : Fragment(R.layout.fragment_expired_items) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentExpiredItemsBinding.inflate(layoutInflater, container, false)
-        binding.expiredRecyclerview.layoutManager = LinearLayoutManager(context)
-        binding.expiredRecyclerview.adapter = adapter
 
-        expiredItemsViewmodel.getexpiredItems.observe(viewLifecycleOwner) {
-            adapter.updateDataSet(it)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
+
+
+        when (expiredItemsViewmodel.getexpiredItems.value?.isNullOrEmpty()) {
+            true -> binding.imgEmptyExpired.emptyListLayout.visibility = View.VISIBLE
+            false -> binding.imgEmptyExpired.emptyListLayout.visibility - View.GONE
         }
-        return super.onCreateView(inflater, container, savedInstanceState)
 
     }
 
+    private fun initRecyclerView() {
+        binding.expiredRecyclerview.layoutManager = LinearLayoutManager(context)
+        binding.expiredRecyclerview.adapter = adapter
+        expiredItemsViewmodel.getexpiredItems.observe(viewLifecycleOwner) {
+            adapter.updateDataSet(it)
+        }
+    }
 }

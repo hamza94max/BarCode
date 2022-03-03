@@ -35,6 +35,8 @@ abstract class BarcodeDataBase : RoomDatabase() {
             ).fallbackToDestructiveMigration()
                 //.addCallback(BarcodeDatabaseCallback(scope))
                 .build()
+
+
     }
 
     private class BarcodeDatabaseCallback(
