@@ -37,15 +37,14 @@ barcodes represented data by varying the widths and spacings of parallel lines.
 </div>
 
 </br> </br>
-### Tools & Libraries :-
-- Barcode library [BarCode library](https://github.com/journeyapps/zxing-android-embedded)
-- Recyclerview 
-- Fragments
-- Bottom navigations
-- Room Database
-- Kotlin coroutines
-- Work mangager 
-- Notification 
+### Libraries and Frameworks :-
+- Barcode library [Zxing Embedded Android](https://github.com/journeyapps/zxing-android-embedded)
+- navigations Components
+- Tablayout 
+- Room Database (Local Database)
+- Kotlin coroutines  - Reactive Programming
+- Work Manager - Schedule background tasks
+- Push Notification 
 
 
 
