@@ -1,41 +1,65 @@
 package com.hamza.barcode.ui.activites
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.hamza.barcode.R
-import com.hamza.barcode.ui.Fragments.ExpiredItemsFragment
-import com.hamza.barcode.ui.Fragments.HomeFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
+import com.hamza.barcode.data.DataSet.Dataset
+import com.hamza.barcode.data.DataSet.Util
+import com.hamza.barcode.databinding.ActivityMainBinding
+import com.hamza.barcode.ui.ViewModels.BarcodeViewmodel
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
 
 class MainActivity : AppCompatActivity() {
 
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewmodel by viewModels<BarcodeViewmodel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        installSplashScreen()
 
-        val firstFragment = HomeFragment()
-        val secondFragment = ExpiredItemsFragment()
-
-        //setCurrentFragment(firstFragment)
-
-
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> setCurrentFragment(firstFragment)
-                R.id.expire -> setCurrentFragment(secondFragment)
-
-            }
-            true
-        }
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
     }
 
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.framelayout, fragment)
-            commit()
+    fun newBarcode(view: View) {
+        Toast.makeText(applicationContext, "Cancelled", Toast.LENGTH_LONG).show()
+    }
 
+    private val resultScan = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+
+        val context: Context = this
+        if (result.contents == null) {
+            Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
+        } else {
+            val newBarcode = Dataset.SearchforBarcode(result.contents)
+
+            if (newBarcode != null) {
+
+                newBarcode.expiredDays =
+                    Util.getExpiredDaysforItem(newBarcode.ExpireDate)
+
+                Toast.makeText(
+                    context,
+                    "added : " + newBarcode.itemName,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                newBarcode.let { viewmodel.insertItem(it) }
+            } else {
+                Toast.makeText(context, "Not found in dataBase ! ", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
 }
+

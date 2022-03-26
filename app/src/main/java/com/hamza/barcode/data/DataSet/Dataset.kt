@@ -61,7 +61,7 @@ class Dataset {
                     "089686120660",
                     "Indomie",
                     ItemType.Food.toString(),
-                    "16/5/2020",
+                    "27/12/2021",
                     14
 
                 )
