@@ -4,5 +4,9 @@
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="you_have_no_products">You have no products</string>
+    <string name="you_have_no_products">You have No products</string>
+    <string name="item_name">item name</string>
+    <string name="item_type">item type</string>
+    <string name="item_expiredate">item expireDate :</string>
+    <string name="days">2 days</string>
 </resources>

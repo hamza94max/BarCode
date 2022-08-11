@@ -5,24 +5,23 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.hamza.barcode.data.Models.BarCodeContent
-
+import com.hamza.barcode.data.Models.BarCodeItem
 
 @Dao
-abstract class BarCodeDao {
+interface BarCodeDao {
 
     @Insert
-    abstract suspend fun insertItem(barCodeContent: BarCodeContent)
+    suspend fun insertItem(barCodeItem: BarCodeItem)
 
-    @Query("SELECT * FROM BarCodetable where expiredDays > 0 order by expiredDays  ")
-    abstract fun getNonexpiredItems(): LiveData<List<BarCodeContent>>
+    @Query("SELECT * FROM BarCodeItems where expiredDays > 0 order by expiredDays  ")
+    fun getNonexpiredItems(): LiveData<List<BarCodeItem>>
 
-    @Query("SELECT * FROM BarCodetable where expiredDays < 0 order by expiredDays  ")
-    abstract fun getexpiredItems(): LiveData<List<BarCodeContent>>
+    @Query("SELECT * FROM BarCodeItems where expiredDays < 0 order by expiredDays  ")
+    fun getexpiredItems(): LiveData<List<BarCodeItem>>
 
     @Delete
-    abstract suspend fun deleteItem(barCodeContent: BarCodeContent?)
+    suspend fun deleteItem(barCodeItem: BarCodeItem?)
 
-    @Query("DELETE FROM BarCodetable")
-    abstract suspend fun deleteAllItems()
+    @Query("DELETE FROM BarCodeItems")
+    suspend fun deleteAllItems()
 }

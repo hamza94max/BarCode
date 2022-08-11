@@ -1,11 +1,10 @@
 package com.hamza.barcode.data.Repository
 
 import android.app.Application
+import com.hamza.barcode.Utils.Util
 import com.hamza.barcode.data.Dao.BarCodeDao
 import com.hamza.barcode.data.DataBase.BarcodeDataBase.Companion.getInstance
-import com.hamza.barcode.data.DataSet.Util
-import com.hamza.barcode.data.Models.BarCodeContent
-
+import com.hamza.barcode.data.Models.BarCodeItem
 
 class BarCodeRepository(application: Application?) {
 
@@ -14,16 +13,16 @@ class BarCodeRepository(application: Application?) {
         database.getBarCodeDao()
     }
 
-    fun AllNonexpiredItems() = dao.getNonexpiredItems()
+    fun getAllNonExpiredItems() = dao.getNonexpiredItems()
 
-    fun AllexpiredItems() = dao.getexpiredItems()
+    fun getAllExpiredItems() = dao.getexpiredItems()
 
-    suspend fun insertItem(barCodeContent: BarCodeContent) {
-        barCodeContent.expiredDays = Util.getExpiredDaysforItem(barCodeContent.ExpireDate)
-        dao.insertItem(barCodeContent)
+    suspend fun insertItem(barCodeItem: BarCodeItem) {
+        barCodeItem.expiredDays = Util.getExpiredDaysforItem(barCodeItem.expireDate)
+        dao.insertItem(barCodeItem)
     }
 
-    suspend fun deleteallItem() {
+    suspend fun deleteAllItem() {
         dao.deleteAllItems()
     }
 }

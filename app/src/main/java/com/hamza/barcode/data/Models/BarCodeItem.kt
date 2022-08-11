@@ -4,12 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-/**
- * Here is the table we created to store values in it
- */
-
-@Entity(tableName = "BarCodetable")
-data class BarCodeContent(
+@Entity(tableName = "BarCodeItems")
+data class BarCodeItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo(name = "barcodeID")
@@ -19,10 +15,17 @@ data class BarCodeContent(
     @ColumnInfo(name = "itemType")
     val itemtype: String,
     @ColumnInfo(name = "ExpireDate")
-    val ExpireDate: String,
+    val expireDate: String,
 
     @ColumnInfo(name = "expiredDays")
     var expiredDays: Int
-
-
-)
+) {
+    constructor(
+        barcodeID: String,
+        itemName: String,
+        itemtype: String,
+        expireDate: String,
+        expiredDays: Int
+    ) :
+            this(0, barcodeID, itemName, itemtype, expireDate, expiredDays)
+}

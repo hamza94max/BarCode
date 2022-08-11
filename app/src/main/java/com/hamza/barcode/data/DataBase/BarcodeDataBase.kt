@@ -6,14 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.hamza.barcode.data.Dao.BarCodeDao
-import com.hamza.barcode.data.DataSet.ItemType
-import com.hamza.barcode.data.Models.BarCodeContent
+import com.hamza.barcode.data.Models.BarCodeItem
+import com.hamza.barcode.data.Models.ItemType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-@Database(entities = [BarCodeContent::class], version = 2)
-
+@Database(
+    entities = [BarCodeItem::class],
+    version = 3
+)
 abstract class BarcodeDataBase : RoomDatabase() {
 
     abstract fun getBarCodeDao(): BarCodeDao
@@ -33,7 +35,7 @@ abstract class BarcodeDataBase : RoomDatabase() {
                 BarcodeDataBase::class.java,
                 "barCode_db"
             ).fallbackToDestructiveMigration()
-                //.addCallback(BarcodeDatabaseCallback(scope))
+                //.addCallback(BarcodeDatabaseCallback(scope!!))
                 .build()
 
 
@@ -55,7 +57,7 @@ abstract class BarcodeDataBase : RoomDatabase() {
         suspend fun populateDatabase(BarCodeDao: BarCodeDao) {
             BarCodeDao.deleteAllItems()
 
-            val barcode1 = BarCodeContent(
+            val barcode1 = BarCodeItem(
                 Random.nextInt(),
                 "6223001874294",
                 "Ferrero Nutella - 400 g",
@@ -64,7 +66,7 @@ abstract class BarcodeDataBase : RoomDatabase() {
                 56
 
             )
-            val barcode2 = BarCodeContent(
+            val barcode2 = BarCodeItem(
                 Random.nextInt(),
                 "6223001360766",
                 "Pepsi ",
@@ -73,7 +75,7 @@ abstract class BarcodeDataBase : RoomDatabase() {
                 25
 
             )
-            val barcode3 = BarCodeContent(
+            val barcode3 = BarCodeItem(
                 Random.nextInt(),
                 "6223001878001",
                 "Milk - Almarai",
@@ -83,14 +85,13 @@ abstract class BarcodeDataBase : RoomDatabase() {
 
             )
 
-            val barcode4 = BarCodeContent(
+            val barcode4 = BarCodeItem(
                 Random.nextInt(),
                 "6221032490304",
                 "Biscuits 300gm ",
                 ItemType.Snacks.toString(),
                 "1/26/2022",
                 18
-
             )
 
             BarCodeDao.insertItem(barcode1)

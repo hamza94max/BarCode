@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="7dp"
-            android:text="item name "
+            android:text="@string/item_name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_name"
             android:padding="7dp"
-            android:text="item type"
+            android:text="@string/item_type"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_type"
             android:padding="7dp"
-            android:text="item expireDate : "
+            android:text="@string/item_expiredate"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
             android:layout_marginStart="155dp"
             android:layout_toEndOf="@+id/item_expireDate"
             android:padding="7dp"
-            android:text="2 days "
+            android:text="@string/days"
             android:textColor="#1BC623"
             android:textSize="17sp" />
 

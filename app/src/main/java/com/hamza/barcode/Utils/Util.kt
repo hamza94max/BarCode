@@ -1,24 +1,20 @@
-package com.hamza.barcode.data.DataSet
+package com.hamza.barcode.Utils
 
 import android.annotation.SuppressLint
 import android.os.Build
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Util {
+object Util {
 
-    companion object {
+    /**
+     * here we calculated the days untill the product is expired
+     */
 
-
-        /**
-         * here we calculated the days untill the product is expired
-         */
-
-
-        @SuppressLint("SimpleDateFormat")
-        fun getExpiredDaysforItem(expiredate: String): Int {
-            val sdf = SimpleDateFormat("dd/MM/yyyy")
-            val expireDate: Date = sdf.parse(expiredate)
+    @SuppressLint("SimpleDateFormat")
+    fun getExpiredDaysforItem(expiredate: String): Int {
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val expireDate: Date = sdf.parse(expiredate) as Date
 
             val diff: Long = Date().time - expireDate.time
             val seconds = diff / 1000
@@ -39,7 +35,7 @@ class Util {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
-                val strDate: Date = sdf.parse(expiredDate)
+                val strDate: Date = sdf.parse(expiredDate) as Date
                 isExpired = Date().after(strDate)
             }
             return !isExpired
@@ -48,4 +44,3 @@ class Util {
     }
 
 
-}
