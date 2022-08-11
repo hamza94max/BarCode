@@ -1,4 +1,4 @@
-package com.hamza.barcode.ui.Fragments
+package com.hamza.barcode.ui.Fragments.HomeFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamza.barcode.R
-import com.hamza.barcode.data.DataSet.Dataset
-import com.hamza.barcode.data.DataSet.Util
+import com.hamza.barcode.Utils.Util.getExpiredDaysforItem
+import com.hamza.barcode.data.DataSet.FakeDataset
 import com.hamza.barcode.databinding.FragmentHomeBinding
-import com.hamza.barcode.ui.Adapters.BarCodeAdapter
-import com.hamza.barcode.ui.ViewModels.BarcodeViewmodel
+import com.hamza.barcode.ui.BarcodeViewModel
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -23,32 +22,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewmodel by viewModels<BarcodeViewmodel>()
-    private val adapter by lazy { BarCodeAdapter(arrayListOf()) }
-
+    private val barcodeViewModel by viewModels<BarcodeViewModel>()
+    private lateinit var homeadapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
 
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.recyclerview.layoutManager = LinearLayoutManager(context)
-        binding.recyclerview.adapter = adapter
-
-        viewmodel.getNonexpiredItems.observe(viewLifecycleOwner) {
-            adapter.updateDataSet(it)
-        }
+        setUpRecyclerView()
+        observeToLiveData()
 
         binding.CaptureNewBarcode.setOnClickListener {
             resultScan.launch(ScanOptions())
@@ -56,17 +47,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+    private fun setUpRecyclerView() {
+        binding.recyclerview.apply {
+            homeadapter = HomeAdapter()
+            layoutManager = LinearLayoutManager(context)
+            adapter = homeadapter
+        }
+    }
+
+    private fun observeToLiveData() {
+        barcodeViewModel.getNonExpiredItems.observe(viewLifecycleOwner) { items ->
+            homeadapter.differ.submitList(items.asReversed())
+        }
+    }
+
 
     private val resultScan = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
         if (result.contents == null) {
             Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
         } else {
-            val newBarcode = Dataset.SearchforBarcode(result.contents)
+            val newBarcode = FakeDataset.searchForBarcode(result.contents)
 
             if (newBarcode != null) {
 
                 newBarcode.expiredDays =
-                    Util.getExpiredDaysforItem(newBarcode.ExpireDate)
+                    getExpiredDaysforItem(newBarcode.expireDate)
 
                 Toast.makeText(
                     context,
@@ -74,13 +79,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                newBarcode.let { viewmodel.insertItem(it) }
+                newBarcode.let { barcodeViewModel.insertItem(it) }
             } else {
                 Toast.makeText(context, "Not found in dataBase ! ", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 
 }
 

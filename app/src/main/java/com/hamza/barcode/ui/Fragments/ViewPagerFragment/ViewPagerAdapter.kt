@@ -1,4 +1,4 @@
-package com.hamza.barcode.ui.Adapters
+package com.hamza.barcode.ui.Fragments.ViewPagerFragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

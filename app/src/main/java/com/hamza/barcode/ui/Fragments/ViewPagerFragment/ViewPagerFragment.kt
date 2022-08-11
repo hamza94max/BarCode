@@ -1,4 +1,4 @@
-package com.hamza.barcode.ui.Fragments
+package com.hamza.barcode.ui.Fragments.ViewPagerFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hamza.barcode.R
 import com.hamza.barcode.databinding.FragmentViewPagerBinding
-import com.hamza.barcode.ui.Adapters.ViewPagerAdapter
-
+import com.hamza.barcode.ui.Fragments.ExpiredItemsFragment.ExpiredItemsFragment
+import com.hamza.barcode.ui.Fragments.HomeFragment.HomeFragment
 
 class ViewPagerFragment : Fragment() {
-
 
     private var _binding: FragmentViewPagerBinding? = null
     private val binding get() = _binding!!
@@ -36,8 +35,8 @@ class ViewPagerFragment : Fragment() {
 
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.home).uppercase()
-                1 -> tab.text = getString(R.string.expired_products).uppercase()
+                0 -> tab.text = getString(R.string.home)
+                1 -> tab.text = getString(R.string.expired_products)
             }
         }.attach()
 

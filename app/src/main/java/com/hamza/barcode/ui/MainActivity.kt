@@ -1,4 +1,4 @@
-package com.hamza.barcode.ui.activites
+package com.hamza.barcode.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -7,11 +7,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-
-import com.hamza.barcode.data.DataSet.Dataset
-import com.hamza.barcode.data.DataSet.Util
+import com.hamza.barcode.Utils.Util
+import com.hamza.barcode.data.DataSet.FakeDataset
 import com.hamza.barcode.databinding.ActivityMainBinding
-import com.hamza.barcode.ui.ViewModels.BarcodeViewmodel
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 
@@ -20,11 +18,10 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewmodel by viewModels<BarcodeViewmodel>()
+    private val viewmodel by viewModels<BarcodeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         installSplashScreen()
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,12 +39,12 @@ class MainActivity : AppCompatActivity() {
         if (result.contents == null) {
             Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
         } else {
-            val newBarcode = Dataset.SearchforBarcode(result.contents)
+            val newBarcode = FakeDataset.searchForBarcode(result.contents)
 
             if (newBarcode != null) {
 
                 newBarcode.expiredDays =
-                    Util.getExpiredDaysforItem(newBarcode.ExpireDate)
+                    Util.getExpiredDaysforItem(newBarcode.expireDate)
 
                 Toast.makeText(
                     context,

@@ -1,51 +1,49 @@
 package com.hamza.barcode.data.DataSet
 
-import com.hamza.barcode.data.Models.BarCodeContent
+import com.hamza.barcode.data.Models.BarCodeItem
+import com.hamza.barcode.data.Models.ItemType
 import kotlin.random.Random
 
-class Dataset {
+object FakeDataset {
 
-    companion object {
+    private val list = ArrayList<BarCodeItem>()
 
-        private val list = ArrayList<BarCodeContent>()
+    /**
+     * We are here searching for the result from Barcode screen in data base
+     * which we created
+     */
+    fun searchForBarcode(otherBarcodeId: String): BarCodeItem? {
 
+        getAllData()
 
-        /**
-         * We are here searching for the result from Barcode screen in data base
-         * which we created
-         */
-        fun SearchforBarcode(otherBarcodeId: String): BarCodeContent? {
+        var barCodeItem: BarCodeItem? = null
 
-            getAllData()
-
-            var barCodeContent: BarCodeContent? = null
-
-            for (i in 0 until list.size - 1) {
-                if (otherBarcodeId.equals(list[i].barcodeID))
-                    barCodeContent = list[i]
-            }
-            return barCodeContent
+        for (i in 0 until list.size - 1) {
+            if (otherBarcodeId.equals(list[i].barcodeID))
+                barCodeItem = list[i]
+        }
+        return barCodeItem
         }
 
 
-        /**
-         * @return a list of barcodeContent model as dataBase and we search for item using barcode result Id
-         */
-        private fun getAllData(): ArrayList<BarCodeContent> {
+    /**
+     * @return a list of barcodeContent model as dataBase and we search for item using barcode result Id
+     */
+    private fun getAllData(): ArrayList<BarCodeItem> {
 
-            list.add(
-                BarCodeContent(
-                    Random.nextInt(),
-                    "6223001874294",
-                    "Ferrero Nutella - 400 g",
-                    ItemType.Chocolates.toString(),
-                    "16/5/2022",
-                    56
+        list.add(
+            BarCodeItem(
+                Random.nextInt(),
+                "6223001874294",
+                "Ferrero Nutella - 400 g",
+                ItemType.Chocolates.toString(),
+                "16/5/2022",
+                56
 
-                )
+            )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "222 68749",
                     "Spring water",
@@ -56,7 +54,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "089686120660",
                     "Indomie",
@@ -67,7 +65,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "6223001360766",
                     "Pepsi ",
@@ -78,7 +76,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "6223000430040",
                     "Bread",
@@ -89,7 +87,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "6223001878001",
                     "Milk - Almarai",
@@ -100,7 +98,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "6221032490304",
                     "Biscuits 300gm ",
@@ -111,7 +109,7 @@ class Dataset {
                 )
             )
             list.add(
-                BarCodeContent(
+                BarCodeItem(
                     Random.nextInt(),
                     "6221031490309",
                     "Doritos",
@@ -123,4 +121,3 @@ class Dataset {
             return list
         }
     }
-}

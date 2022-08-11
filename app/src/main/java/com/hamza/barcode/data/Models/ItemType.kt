@@ -1,4 +1,4 @@
-package com.hamza.barcode.data.DataSet
+package com.hamza.barcode.data.Models
 
 enum class ItemType {
 

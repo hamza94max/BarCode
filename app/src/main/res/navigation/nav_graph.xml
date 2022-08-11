@@ -8,18 +8,18 @@
 
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.hamza.barcode.ui.Fragments.ViewPagerFragment"
+        android:name="com.hamza.barcode.ui.Fragments.ViewPagerFragment.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.hamza.barcode.ui.Fragments.HomeFragment"
+        android:name="com.hamza.barcode.ui.Fragments.HomeFragment.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/expiredItemsFragment"
-        android:name="com.hamza.barcode.ui.Fragments.ExpiredItemsFragment"
+        android:name="com.hamza.barcode.ui.Fragments.ExpiredItemsFragment.ExpiredItemsFragment"
         android:label="ExpiredItemsFragment"
         tools:layout="@layout/fragment_expired_items" />
 
